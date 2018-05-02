@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d037da99bd683bedb0c7a6eafbe9af3119e983093c993e07110d594650ada155
+-- hash: 92d763925114c0e4a0a7f8b91fdffca4baeb027be939858cdbf68a5dd068d25b
 
 name:           haskell-hcup
 version:        0.1.0.0
@@ -14,8 +14,12 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , bytestring
+    , http-types
+    , wai
+    , warp
   exposed-modules:
-      Lib
+      Main
   other-modules:
       Paths_haskell_hcup
   default-language: Haskell2010
@@ -23,12 +27,16 @@ library
 executable haskell-hcup-exe
   main-is: Main.hs
   hs-source-dirs:
-      app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Main
   build-depends:
       base >=4.7 && <5
-    , haskell-hcup
+    , bytestring
+    , http-types
+    , wai
+    , warp
   other-modules:
+      Main
       Paths_haskell_hcup
   default-language: Haskell2010
 
@@ -40,7 +48,11 @@ test-suite haskell-hcup-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , haskell-hcup
+    , http-types
+    , wai
+    , warp
   other-modules:
       Paths_haskell_hcup
   default-language: Haskell2010
