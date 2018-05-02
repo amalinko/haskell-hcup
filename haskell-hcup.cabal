@@ -2,28 +2,12 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: aecf0d7cb4a39dcfcd3671c539814a8bdacaf3c6ac94e0ebdaa4f8e26a860702
+-- hash: d037da99bd683bedb0c7a6eafbe9af3119e983093c993e07110d594650ada155
 
 name:           haskell-hcup
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/haskell-hcup#readme>
-homepage:       https://github.com/githubuser/haskell-hcup#readme
-bug-reports:    https://github.com/githubuser/haskell-hcup/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2018 Author name here
-license:        BSD3
-license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
-
-extra-source-files:
-    ChangeLog.md
-    README.md
-
-source-repository head
-  type: git
-  location: https://github.com/githubuser/haskell-hcup
 
 library
   hs-source-dirs:
