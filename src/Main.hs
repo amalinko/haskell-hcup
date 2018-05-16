@@ -25,7 +25,23 @@ instance FromJSON User
 
 instance ToJSON User
 
-type API = "users" :> Get '[ JSON] User
+data Location = Location
+  { lId :: Int
+  , place :: String
+  , country :: String
+  , city :: String
+  , distance :: Int
+  } deriving (Eq, Show, Generic)
+
+instance FromJSON Location
+
+instance ToJSON Location
+
+type UserApi = "users" :> Capture "id" Int :> Get '[ JSON] User
+
+type LocationApi = "locations" :> Get '[ JSON] Location
+
+type API = UserApi :<|> LocationApi
 
 startApp :: IO ()
 startApp = run 8080 app
@@ -37,6 +53,11 @@ api :: Proxy API
 api = Proxy
 
 server :: Server API
-server = return $ User 1 "example@mail.ru" "John" "Doe" "m" "1613433600"
+server = users :<|> locations
+  where
+    users :: Int -> Handler User
+    users id = return $ User 1 "example@mail.ru" "John" "Doe" "m" "1613433600"
+    locations :: Handler Location
+    locations = return $ Location 2 "Grand Canyon" "USA" "Las-Vegas" 100
 
 main = startApp
