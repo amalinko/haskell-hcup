@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 55a257bcaac287a72c321e233db93e1b2ea668f73bbf691d56f39396f3a2e3e2
+-- hash: cce81eb50ccae0ef379003748284f4cde7e41cc59daa3511c5b41d1781fcb5d6
 
 name:           haskell-hcup
 version:        0.1.0.0
@@ -17,6 +17,9 @@ library
     , base >=4.7 && <5
     , bytestring
     , http-types
+    , servant
+    , servant-server
+    , text
     , wai
     , warp
   exposed-modules:
@@ -35,6 +38,9 @@ executable haskell-hcup-exe
     , base >=4.7 && <5
     , bytestring
     , http-types
+    , servant
+    , servant-server
+    , text
     , wai
     , warp
   other-modules:
@@ -54,6 +60,9 @@ test-suite haskell-hcup-test
     , bytestring
     , haskell-hcup
     , http-types
+    , servant
+    , servant-server
+    , text
     , wai
     , warp
   other-modules:
