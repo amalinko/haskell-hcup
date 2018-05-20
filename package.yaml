@@ -11,6 +11,8 @@ dependencies:
 - servant
 - text
 - servant-server
+- containers
+- mtl
 
 library:
   source-dirs: src

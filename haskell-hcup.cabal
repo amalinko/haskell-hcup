@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cce81eb50ccae0ef379003748284f4cde7e41cc59daa3511c5b41d1781fcb5d6
+-- hash: 24c00e1d38f1e967039c8a2192cdea84e7062dfbc5d9dc5188bbb71cb3092497
 
 name:           haskell-hcup
 version:        0.1.0.0
@@ -16,7 +16,9 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , http-types
+    , mtl
     , servant
     , servant-server
     , text
@@ -37,7 +39,9 @@ executable haskell-hcup-exe
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , http-types
+    , mtl
     , servant
     , servant-server
     , text
@@ -58,8 +62,10 @@ test-suite haskell-hcup-test
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , haskell-hcup
     , http-types
+    , mtl
     , servant
     , servant-server
     , text
