@@ -30,6 +30,17 @@ instance FromJSON User
 
 instance ToJSON User
 
+-- data UpdateUser = UpdateUser
+--   { email :: String
+--   , firstName :: String
+--   , lastName :: String
+--   , gender :: String
+--   , birthDate :: String
+--   } deriving (Eq, Show, Generic)
+--
+-- instance FromJSON UpdateUser
+--
+-- instance ToJSON UpdateUser
 data Location = Location
   { lId :: Int
   , place :: String
@@ -54,7 +65,8 @@ instance FromJSON Visit
 
 instance ToJSON Visit
 
-type UserApi = "users" :> Capture "id" Int :> Get '[ JSON] User
+type UserApi
+   = "users" :> Capture "id" Int :> Get '[ JSON] User :<|> "users" :> ReqBody '[ JSON] User :> Post '[ JSON] User
 
 type LocationApi = "locations" :> Get '[ JSON] Location
 
@@ -72,20 +84,28 @@ startApp = do
 app :: IORef (M.Map Int User) -> IO Application
 app users = do
   print "servert started"
-  return $ serve api (server users)
+  return $ serve api $ userServer users :<|> locationServer
 
 api :: Proxy API
 api = Proxy
 
-server :: IORef (M.Map Int User) -> Server API
-server users = usersRoute :<|> locations
+userServer :: IORef (M.Map Int User) -> Server UserApi
+userServer users = getUserRoute :<|> updateUserRoute
   where
-    usersRoute :: Int -> Handler User
-    usersRoute id = do
+    getUserRoute :: Int -> Handler User
+    getUserRoute id = do
       u <- liftIO $ readIORef users
       case M.lookup id u of
         Just u' -> return u'
         Nothing -> throwError (ServantErr 404 "User not found" "" [])
+    updateUserRoute :: User -> Handler User
+    updateUserRoute cmd = do
+      _ <- liftIO $ print cmd
+      return cmd
+
+locationServer :: Server LocationApi
+locationServer = locations
+  where
     locations :: Handler Location
     locations = return $ Location 2 "Grand Canyon" "USA" "Las-Vegas" 100
 
